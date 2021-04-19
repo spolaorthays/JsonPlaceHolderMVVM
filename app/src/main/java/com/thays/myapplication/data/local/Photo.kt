@@ -1,4 +1,4 @@
-package com.thays.myapplication.model.local
+package com.thays.myapplication.data.local
 
 import com.google.gson.annotations.SerializedName
 

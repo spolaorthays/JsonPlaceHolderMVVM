@@ -1,6 +1,6 @@
-package com.thays.myapplication.model.remote
+package com.thays.myapplication.data.remote
 
-import com.thays.myapplication.model.local.Photo
+import com.thays.myapplication.data.local.Photo
 import io.reactivex.Single
 import retrofit2.http.GET
 

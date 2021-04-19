@@ -1,4 +1,4 @@
-package com.thays.myapplication
+package com.thays.myapplication.utils
 
 class Constants {
 
