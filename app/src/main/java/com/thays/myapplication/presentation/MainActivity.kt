@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.thays.myapplication.R
 import com.thays.myapplication.data.MainRepository
 import com.thays.myapplication.data.remote.Network
@@ -30,6 +31,8 @@ open class DataBindingHelper: AppCompatActivity() {
 class MainActivity : DataBindingHelper() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: RecyclerPhotosAdapter
 
     private val viewModel: MainViewModel by lazy {
         MainViewModel(
@@ -42,15 +45,27 @@ class MainActivity : DataBindingHelper() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         binding = bind(R.layout.activity_main) {
             viewmodel = viewModel
             lifecycleOwner = this@MainActivity
         }
 
+        setupRecycler()
+        setupViewModel()
+
+    }
+
+    private fun setupRecycler() {
+        recyclerView = findViewById(R.id.recyclerView)
+        adapter = RecyclerPhotosAdapter()
+        recyclerView.adapter = adapter
+    }
+
+    private fun setupViewModel() {
+        viewModel.getPhotosFromInteractor()
         viewModel.photoList.observeForever { listPhoto ->
-            //seta a lista no recyclerView aqui?
+            adapter.updatePhotos(listPhoto)
         }
     }
 

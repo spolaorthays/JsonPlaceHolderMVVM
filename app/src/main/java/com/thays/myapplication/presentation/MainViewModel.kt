@@ -1,7 +1,5 @@
 package com.thays.myapplication.presentation
 
-import android.provider.ContactsContract
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.thays.myapplication.data.local.Photo
@@ -24,8 +22,12 @@ class MainViewModel(
                 .subscribeOn(scheduler.io)
                 .observeOn(scheduler.main)
                 .subscribeBy (
-                    onSuccess = {},
-                    onError = {}
+                    onSuccess = {
+                        photoList.value = it
+                    },
+                    onError = {
+                        println("Erro ao consultar a API: ${it.message}")
+                    }
                 )
         )
     }
